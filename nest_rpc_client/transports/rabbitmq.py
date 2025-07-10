@@ -15,6 +15,8 @@ class RabbitMQTransport(Transport):
 
     def __init__(self, config: RabbitMQConfig):
         self.config = config
+        self.channel = None  # type: ignore
+        self.connection = None  # type: ignore
 
     async def connect(self) -> None:
         self.connection = await aio_pika.connect_robust(self.config.url)
