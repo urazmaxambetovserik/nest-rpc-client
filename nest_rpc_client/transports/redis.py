@@ -20,7 +20,7 @@ class RedisTransport(Transport):
 
     async def close(self) -> None:
         if hasattr(self, "client") and self.client:
-            await self.client.close()
+            await self.client.aclose()
 
     async def send(self, pattern: str, data: dict) -> dict:
         correlation_id = str(uuid.uuid4())
@@ -48,7 +48,7 @@ class RedisTransport(Transport):
                     break
             finally:
                 await pubsub.unsubscribe(reply_channel)
-                await pubsub.close()
+                await pubsub.aclose()
 
         asyncio.create_task(listener())
         await self.client.publish(pattern, message)
