@@ -7,12 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+aio-pika = "^9.5.5"
+redis = "^6.2.0"
+nats-py = "^2.10.0"
 
 [tool.poetry.extras]
-rabbitmq = ['aio-pika>=9.5.5']
-redis = ['redis>=6.2.0']
-nats = ['nats-py>=2.10.0']
-
+rabbitmq = ["aio-pika"]
+redis = ["redis"]
+nats = ["nats-py"]
+all = ["aio-pika", "redis", "nats"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
