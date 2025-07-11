@@ -51,8 +51,9 @@ class RabbitMQTransport(Transport):
             async for message in queue_iter:
                 async with message.process():
                     if message.correlation_id == correlation_id:
-                        response_data = json.loads(message.body.decode("utf-8"))
-                        future.set_result(response_data)
+                        response = json.loads(message.body.decode("utf-8"))
+
+                        future.set_result(response["response"])
                         break
 
         return await future
