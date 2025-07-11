@@ -89,3 +89,9 @@ This project includes both unit tests and full integration tests.
 
 - Unit tests are included in this repository and can be run with: `pytest`
 - Full integration tests are available in a separate repository: [nest-rpc-client-tests](https://github.com/urazmaxambetovserik/nest-rpc-client-tests)
+
+## TODO:
+
+- Implement tcp transport
+- Implement kafka transport
+- Implement mqtt transport
