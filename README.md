@@ -50,6 +50,18 @@ await transport.emit("user_created", {"id": 123})
 await transport.close()
 ```
 
+
+## Pattern usage with dictionaries
+
+If your pattern is a dictionary (object in js, for example: {cmd: "sum"}), you need to serialize it to a string before using it.
+Example:
+
+```python
+pattern = json.dumps({"cmd": "sum"}) # '{"cmd": "sum"}'
+await client.send(pattern, data)
+```
+
+
 ## Custom Transport
 
 `nest-rpc-client` allows you to use your own custom transports. To do this, inherit from the `Transport` base class and implement its abstract methods:
