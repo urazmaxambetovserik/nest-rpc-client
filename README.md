@@ -1,5 +1,8 @@
 # nest-rpc-client
 
+[![PyPI](https://img.shields.io/pypi/v/nest-rpc-client?color=blue)](https://pypi.org/project/nest-rpc-client/)
+[![Python](https://img.shields.io/pypi/pyversions/nest-rpc-client)](https://pypi.org/project/nest-rpc-client/)
+
 *Async Python client for RPC transport interoperability with NestJS microservices.*
 Supports RabbitMQ, Redis, NATS (and planned support for Kafka, MQTT).
 
