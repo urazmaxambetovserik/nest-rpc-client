@@ -17,6 +17,9 @@ redis = ["redis"]
 nats = ["nats-py"]
 all = ["aio-pika", "redis", "nats"]
 
+[project.urls]
+Homepage = "https://github.com/urazmaxambetovserik/nest-rpc-client"
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-asyncio = "^1.0.0"
