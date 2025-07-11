@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nest-rpc-client"
-version = "0.1.1-beta"
+version = "0.1.2-beta"
 description = ""
 authors = ["Urazmaxambetov Serik <urazmaxambetovserik@gmail.com>"]
 readme = "README.md"
