@@ -111,3 +111,4 @@ This project includes both unit tests and full integration tests.
 
 - Implement kafka transport
 - Implement mqtt transport
+- Implement exception handling
