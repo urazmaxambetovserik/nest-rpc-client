@@ -110,7 +110,7 @@ async def test_send_publishes_message_and_receives_reply(mock_uuid4):
 
     transport.channel = fake_channel
 
-    reply_body = json.dumps({"result": "ok"}).encode("utf-8")
+    reply_body = json.dumps({"response": {"result": "ok"}}).encode("utf-8")
 
     fake_message = AsyncMock()
     fake_message.correlation_id = correlation_id

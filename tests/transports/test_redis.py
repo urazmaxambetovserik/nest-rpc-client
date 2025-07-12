@@ -44,7 +44,7 @@ async def test_close_closes_client_if_exists():
     transport.client = AsyncMock()
     await transport.close()
 
-    transport.client.close.assert_awaited_once()
+    transport.client.aclose.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -98,7 +98,7 @@ async def test_send_publishes_and_listens_for_response(mock_uuid4):
 
     fake_pubsub.subscribe = AsyncMock()
     fake_pubsub.unsubscribe = AsyncMock()
-    fake_pubsub.close = AsyncMock()
+    fake_pubsub.aclose = AsyncMock()
 
     result = await transport.send("pattern", {"x": 123})
 
@@ -111,4 +111,4 @@ async def test_send_publishes_and_listens_for_response(mock_uuid4):
 
     fake_pubsub.subscribe.assert_awaited_once_with("pattern.reply")
     fake_pubsub.unsubscribe.assert_awaited_once_with("pattern.reply")
-    fake_pubsub.close.assert_awaited_once()
+    fake_pubsub.aclose.assert_awaited_once()
