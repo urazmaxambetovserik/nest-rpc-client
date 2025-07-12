@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "nest-rpc-client"
 version = "1.0.2"
-description = ""
+description = "Async Python client for RPC transport interoperability with NestJS microservices."
 authors = ["Urazmaxambetov Serik <urazmaxambetovserik@gmail.com>"]
 readme = "README.md"
 
