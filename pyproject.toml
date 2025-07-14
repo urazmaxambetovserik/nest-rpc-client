@@ -15,7 +15,7 @@ nats-py = "^2.10.0"
 rabbitmq = ["aio-pika"]
 redis = ["redis"]
 nats = ["nats-py"]
-all = ["aio-pika", "redis", "nats"]
+all = ["aio-pika", "redis", "nats-py"]
 
 [tool.poetry.urls]
 Homepage = "https://github.com/urazmaxambetovserik/nest-rpc-client"

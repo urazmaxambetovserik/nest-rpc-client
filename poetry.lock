@@ -578,7 +578,13 @@ idna = ">=2.0"
 multidict = ">=4.0"
 propcache = ">=0.2.1"
 
+[extras]
+all = ["aio-pika", "nats-py", "redis"]
+nats = ["nats-py"]
+rabbitmq = ["aio-pika"]
+redis = ["redis"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "44ee61f11c7bf19b0d8e99b6136a5dc6be0e645b39c210963ff65d85d0ac183c"
+content-hash = "d22e25966f2bc7f96916141e6174cd390fac46d4fed9fdc07cceea82ce153881"
