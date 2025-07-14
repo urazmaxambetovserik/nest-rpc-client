@@ -47,6 +47,8 @@ class RedisTransport(Transport):
 
                     future.set_result(parse_response(response_body))
                     break
+            except Exception as e:
+                future.set_exception(e)
             finally:
                 await pubsub.unsubscribe(reply_channel)
                 await pubsub.aclose()

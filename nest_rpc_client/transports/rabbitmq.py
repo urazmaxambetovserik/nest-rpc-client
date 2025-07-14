@@ -1,4 +1,3 @@
-import asyncio
 import json
 import uuid
 
@@ -46,18 +45,13 @@ class RabbitMQTransport(Transport):
             routing_key=self.config.queue,
         )
 
-        future = asyncio.get_event_loop().create_future()
-
         async with reply_queue.iterator() as queue_iter:
             async for message in queue_iter:
                 async with message.process():
                     if message.correlation_id == correlation_id:
                         response_body = json.loads(message.body.decode("utf-8"))
 
-                        future.set_result(parse_response(response_body))
-                        break
-
-        return await future
+                        return parse_response(response_body)
 
     async def emit(self, pattern: str, data: dict) -> None:
         body = json.dumps({"pattern": pattern, "data": data}).encode("utf-8")
