@@ -6,6 +6,7 @@ from redis.asyncio import Redis
 
 from ..config.redis import RedisConfig
 from ..transport import Transport
+from ..utils.parse_response import parse_response
 
 
 class RedisTransport(Transport):
@@ -39,12 +40,12 @@ class RedisTransport(Transport):
                     if msg["type"] != "message":
                         continue
 
-                    body = json.loads(msg["data"])
+                    response_body = json.loads(msg["data"])
 
-                    if body.get("id") != correlation_id:
+                    if response_body.get("id") != correlation_id:
                         continue
 
-                    future.set_result(body.get("response"))
+                    future.set_result(parse_response(response_body))
                     break
             finally:
                 await pubsub.unsubscribe(reply_channel)

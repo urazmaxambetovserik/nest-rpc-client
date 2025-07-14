@@ -4,6 +4,7 @@ import uuid
 
 from ..config.tcp import TCPConfig
 from ..transport import Transport
+from ..utils.parse_response import parse_response
 
 
 class TCPTransport(Transport):
@@ -53,8 +54,8 @@ class TCPTransport(Transport):
         while len(rest) < expected_length:
             rest += (await self.reader.read(4096)).decode()
 
-        response_json = json.loads(rest[:expected_length])
-        return response_json["response"]
+        response_body = json.loads(rest[:expected_length])
+        return parse_response(response_body)
 
     async def emit(self, pattern: str, data: dict) -> None:
         payload = {"pattern": pattern, "data": data}

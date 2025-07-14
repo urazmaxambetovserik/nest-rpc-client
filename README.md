@@ -100,6 +100,40 @@ async with Client(transport) as client:
     result = await client.send("my_pattern", {"foo": "bar"})
 ```
 
+## Exception handling
+
+`nest-rpc-client` raises `RpcException` whenever the RPC server returns an error.
+Example:
+
+```python
+from nest_rpc_client.client import Client
+from nest_rpc_client.transports.rabbitmq import RabbitMQTransport
+from nest_rpc_client.config.rabbitmq import RabbitMQConfig
+from nest_rpc_client.exceptions import RpcException
+
+transport = RabbitMQTransport(RabbitMQConfig(url="amqp://guest:guest@localhost/", queue="rpc_queue"))
+
+async with Client(transport) as client:
+    try:
+        result = await client.send("get_user", {"id": 123})
+    except RpcException as e:
+        print(f"RPC Error: {e.err}")
+```
+
+When the RPC response includes an `err` field (following the NestJS microservice pattern), the client automatically raises `RpcException` with the contents of `err` as its attribute:
+
+```json
+{
+    "id": "correlation-id",
+    "err": {
+        "message": "User not found",
+        "code": 404
+    }
+}
+```
+
+This allows consistent error handling across all transports.
+
 ## Tests:
 
 This project includes both unit tests and full integration tests.
@@ -107,8 +141,8 @@ This project includes both unit tests and full integration tests.
 - Unit tests are included in this repository and can be run with: `pytest`
 - Full integration tests are available in a separate repository: [nest-rpc-client-tests](https://github.com/urazmaxambetovserik/nest-rpc-client-tests)
 
+
 ## TODO:
 
 - Implement kafka transport
 - Implement mqtt transport
-- Implement exception handling

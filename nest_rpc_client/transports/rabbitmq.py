@@ -6,6 +6,7 @@ import aio_pika
 
 from ..config.rabbitmq import RabbitMQConfig
 from ..transport import Transport
+from ..utils.parse_response import parse_response
 
 
 class RabbitMQTransport(Transport):
@@ -51,9 +52,9 @@ class RabbitMQTransport(Transport):
             async for message in queue_iter:
                 async with message.process():
                     if message.correlation_id == correlation_id:
-                        response = json.loads(message.body.decode("utf-8"))
+                        response_body = json.loads(message.body.decode("utf-8"))
 
-                        future.set_result(response["response"])
+                        future.set_result(parse_response(response_body))
                         break
 
         return await future

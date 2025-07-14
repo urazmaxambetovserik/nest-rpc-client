@@ -6,6 +6,7 @@ from nats.aio.client import Client
 
 from ..config.nats import NATSConfig
 from ..transport import Transport
+from ..utils.parse_response import parse_response
 
 
 class NATSTransport(Transport):
@@ -35,12 +36,8 @@ class NATSTransport(Transport):
         msg = await self.client.request(
             pattern, message, timeout=self.config.response_timeout
         )
-        response_data: dict = json.loads(msg.data)
-
-        if response_data.get("id") != correlation_id:
-            raise ValueError("Correlation ID mismatch")
-
-        return response_data["response"]
+        response_body: dict = json.loads(msg.data)
+        return parse_response(response_body)
 
     async def emit(self, pattern: str, data: dict) -> None:
         await self.client.publish(
